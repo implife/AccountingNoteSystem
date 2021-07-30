@@ -32,7 +32,11 @@ namespace AccountingNote.Auth
             DataRow dr = UserInfoManager.GetUserInfoByAccount(account);
 
             if (dr == null)
+            {
+                HttpContext.Current.Session["UserLoginInfo"] = null;
                 return null;
+            }
+                
 
             UserInfoModel model = new UserInfoModel();
             model.ID = dr["ID"].ToString();
@@ -41,6 +45,12 @@ namespace AccountingNote.Auth
             model.Email = dr["Email"].ToString();
 
             return model;
+        }
+
+
+        public static void Logout()
+        {
+            HttpContext.Current.Session["UserLoginInfo"] = null;
         }
     }
 }

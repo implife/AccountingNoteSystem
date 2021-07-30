@@ -27,7 +27,6 @@ namespace AccountingNote.SystemAdmin
                 // 可能被管理者砍帳號
                 if (currentUser == null)
                 {
-                    this.Session["UserLoginInfo"] = null;
                     Response.Redirect("/Login.aspx");
                     return;
                 }
@@ -40,7 +39,7 @@ namespace AccountingNote.SystemAdmin
 
         protected void btnLogout_Click(object sender, EventArgs e)
         {
-            this.Session["UserLoginInfo"] = null;
+            AuthManager.Logout();
             Response.Redirect("/Login.aspx");
         }
     }

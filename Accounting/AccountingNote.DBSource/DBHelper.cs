@@ -17,9 +17,31 @@ namespace AccountingNote.DBSource
             return val;
         }
 
-        //public static DataTable ReadDataTable(string connStr, string dbCommand, List<SqlParameter> list)
-        //{
+        public static DataTable ReadDataTable(string connStr, string dbCommand, List<SqlParameter> list)
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                using (SqlCommand comm = new SqlCommand(dbCommand, conn))
+                {
+                    comm.Parameters.AddRange(list.ToArray());
+                    try
+                    {
+                        conn.Open();
+                        var reader = comm.ExecuteReader();
 
-        //}
+                        DataTable dt = new DataTable();
+                        dt.Load(reader);
+                        reader.Close();
+
+                        return dt;
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.WriteLog(ex);
+                        return null;
+                    }
+                }
+            }
+        }
     }
 }

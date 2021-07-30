@@ -84,17 +84,19 @@ namespace AccountingNote.SystemAdmin
             }
 
             // 取得使用者資料(drUserInfo)
-            string account = this.Session["UserLoginInfo"] as string;
-            var drUserInfo = UserInfoManager.GetUserInfoByAccount(account);
+            //string account = this.Session["UserLoginInfo"] as string;
+            //var drUserInfo = UserInfoManager.GetUserInfoByAccount(account);
 
-            if (drUserInfo == null)
+            UserInfoModel currentUser = AuthManager.GetCurrentUser();
+            if (currentUser == null)
             {
                 Response.Redirect("/Login.aspx");
                 return;
             }
+            
+            string userID = currentUser.ID;
 
             // 取得輸入值
-            string userID = drUserInfo["ID"].ToString();
             string actTypeText = this.ddlType.SelectedValue;
             string amountText = this.txtAmount.Text;
             string caption = this.txtCaption.Text;
