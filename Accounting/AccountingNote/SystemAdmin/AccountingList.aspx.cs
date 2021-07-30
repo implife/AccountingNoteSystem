@@ -1,4 +1,5 @@
-﻿using AccountingNote.DBSource;
+﻿using AccountingNote.Auth;
+using AccountingNote.DBSource;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,22 +16,23 @@ namespace AccountingNote.SystemAdmin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (this.Session["UserLoginInfo"] == null)
+            if (!AuthManager.IsLogined())
             {
                 Response.Redirect("/Login.aspx");
                 return;
             }
 
-            string account = this.Session["UserLoginInfo"] as string;
-            var dr = UserInfoManager.GetUserInfoByAccount(account);
+            UserInfoModel currentUser = AuthManager.GetCurrentUser();
 
-            if(dr == null)
+            // 可能被管理者砍帳號
+            if (currentUser == null)
             {
+                this.Session["UserLoginInfo"] = null;
                 Response.Redirect("/Login.aspx");
                 return;
             }
 
-            DataTable dt = AccountingManager.GetAccountingList(dr["ID"].ToString());
+            DataTable dt = AccountingManager.GetAccountingList(currentUser.ID);
 
             if(dt.Rows.Count > 0)
             {
