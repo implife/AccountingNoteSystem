@@ -43,5 +43,49 @@ namespace AccountingNote.DBSource
                 }
             }
         }
+
+        public static DataRow ReadDataRow(string connStr, string dbCommand, List<SqlParameter> list)
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                using (SqlCommand comm = new SqlCommand(dbCommand, conn))
+                {
+                    comm.Parameters.AddRange(list.ToArray());
+                    try
+                    {
+                        conn.Open();
+                        var reader = comm.ExecuteReader();
+
+                        DataTable dt = new DataTable();
+                        dt.Load(reader);
+                        reader.Close();
+
+                        if (dt.Rows.Count == 0)
+                            return null;
+                        return dt.Rows[0];
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.WriteLog(ex);
+                        return null;
+                    }
+                }
+            }
+        }
+
+        public static int ModifyData(string connStr, string dbCommand, List<SqlParameter> list)
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                using (SqlCommand comm = new SqlCommand(dbCommand, conn))
+                {
+                    comm.Parameters.AddRange(list.ToArray());
+
+                    conn.Open();
+                    int effectRowsCount = comm.ExecuteNonQuery();
+                    return effectRowsCount;
+                }
+            }
+        }
     }
 }

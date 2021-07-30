@@ -19,27 +19,17 @@ namespace AccountingNote.DBSource
                 FROM Accounting
                 WHERE UserID = @userID
             ";
+            List<SqlParameter> list = new List<SqlParameter>();
+            list.Add(new SqlParameter("@userID", id));
 
-            using(SqlConnection conn = new SqlConnection(connStr))
+            try
             {
-                using(SqlCommand comm = new SqlCommand(dbCommand, conn))
-                {
-                    comm.Parameters.AddWithValue("@userID", id);
-                    try
-                    {
-                        conn.Open();
-                        var reader = comm.ExecuteReader();
-                        DataTable dt = new DataTable();
-                        dt.Load(reader);
-                        reader.Close();
-                        return dt;
-                    }
-                    catch(Exception ex)
-                    {
-                        Logger.WriteLog(ex);
-                        return null;
-                    }
-                }
+                return DBHelper.ReadDataTable(connStr, dbCommand, list);
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex);
+                return null;
             }
         }
 
@@ -56,7 +46,7 @@ namespace AccountingNote.DBSource
             if (amount < 0 || amount > 1000000)
                 throw new ArgumentException("Amount must between 0 and 1,000,000");
 
-            if(actType != 0 && actType != 1)
+            if (actType != 0 && actType != 1)
                 throw new ArgumentException("ActType must be 0 or 1.");
 
             string connectionString = DBHelper.GetConnectionString();
@@ -111,33 +101,28 @@ namespace AccountingNote.DBSource
                  WHERE
                     ID = @id
                 ";
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                using (SqlCommand comm = new SqlCommand(dbCommandString, conn))
-                {
-                    comm.Parameters.AddWithValue("@UserId", UserID);
-                    comm.Parameters.AddWithValue("@cap", caption);
-                    comm.Parameters.AddWithValue("@amount", amount);
-                    comm.Parameters.AddWithValue("@type", actType);
-                    comm.Parameters.AddWithValue("@createDate", DateTime.Now);
-                    comm.Parameters.AddWithValue("@body", body);
-                    comm.Parameters.AddWithValue("@id", id);
 
-                    try
-                    {
-                        conn.Open();
-                        int affect = comm.ExecuteNonQuery();
-                        if (affect == 0)
-                            return false;
-                        else
-                            return true;
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.WriteLog(ex);
-                        return false;
-                    }
-                }
+            List<SqlParameter> list = new List<SqlParameter>();
+            list.Add(new SqlParameter("@UserId", UserID));
+            list.Add(new SqlParameter("@cap", caption));
+            list.Add(new SqlParameter("@amount", amount));
+            list.Add(new SqlParameter("@type", actType));
+            list.Add(new SqlParameter("@createDate", DateTime.Now));
+            list.Add(new SqlParameter("@body", body));
+            list.Add(new SqlParameter("@id", id));
+
+            try
+            {
+                int effectRowsCount = DBHelper.ModifyData(connectionString, dbCommandString, list);
+                if (effectRowsCount == 0)
+                    return false;
+                else
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex);
+                return false;
             }
         }
 
@@ -149,33 +134,19 @@ namespace AccountingNote.DBSource
                 FROM Accounting
                 WHERE ID = @id AND UserID = @userID
             ";
+            List<SqlParameter> list = new List<SqlParameter>();
+            list.Add(new SqlParameter("@id", id));
+            list.Add(new SqlParameter("@userID", userID));
 
-            using (SqlConnection conn = new SqlConnection(connStr))
+
+            try
             {
-                using (SqlCommand comm = new SqlCommand(dbCommand, conn))
-                {
-                    comm.Parameters.AddWithValue("@id", id);
-                    comm.Parameters.AddWithValue("@userID", userID);
-                    try
-                    {
-                        conn.Open();
-                        var reader = comm.ExecuteReader();
-
-                        DataTable dt = new DataTable();
-                        dt.Load(reader);
-                        reader.Close();
-
-                        if (dt.Rows.Count == 0)
-                            return null;
-
-                        return dt.Rows[0];
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.WriteLog(ex);
-                        return null;
-                    }
-                }
+                return DBHelper.ReadDataRow(connStr, dbCommand, list);
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex);
+                return null;
             }
         }
 
@@ -187,26 +158,21 @@ namespace AccountingNote.DBSource
                 WHERE ID = @id
             ";
 
-            using (SqlConnection conn = new SqlConnection(connStr))
+            List<SqlParameter> list = new List<SqlParameter>();
+            list.Add(new SqlParameter("@id", id));
+
+            try
             {
-                using (SqlCommand comm = new SqlCommand(dbCommand, conn))
-                {
-                    comm.Parameters.AddWithValue("@id", id);
-                    try
-                    {
-                        conn.Open();
-                        int affect = comm.ExecuteNonQuery();
-                        if (affect == 0)
-                            return false;
-                        else
-                            return true;
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.WriteLog(ex);
-                        return false;
-                    }
-                }
+                int effectRowsCount = DBHelper.ModifyData(connStr, dbCommand, list);
+                if (effectRowsCount == 0)
+                    return false;
+                else
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex);
+                return false;
             }
         }
 
