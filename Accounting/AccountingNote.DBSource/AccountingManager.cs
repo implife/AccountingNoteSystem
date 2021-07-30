@@ -49,34 +49,29 @@ namespace AccountingNote.DBSource
             if (actType != 0 && actType != 1)
                 throw new ArgumentException("ActType must be 0 or 1.");
 
-            string connectionString = DBHelper.GetConnectionString();
-            string dbCommandString =
+            string connStr = DBHelper.GetConnectionString();
+            string dbCommand =
                 @"INSERT INTO Accounting 
                     (UserID, Caption, Amount, ActType, createDate, Body)
                     VALUES 
                     (@id, @cap, @amount, @type, @createDate, @body);
                 ";
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                using (SqlCommand comm = new SqlCommand(dbCommandString, conn))
-                {
-                    comm.Parameters.AddWithValue("@id", UserID);
-                    comm.Parameters.AddWithValue("@cap", caption);
-                    comm.Parameters.AddWithValue("@amount", amount);
-                    comm.Parameters.AddWithValue("@type", actType);
-                    comm.Parameters.AddWithValue("@createDate", DateTime.Now);
-                    comm.Parameters.AddWithValue("@body", body);
 
-                    try
-                    {
-                        conn.Open();
-                        comm.ExecuteNonQuery();
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.WriteLog(ex);
-                    }
-                }
+            List<SqlParameter> list = new List<SqlParameter>();
+            list.Add(new SqlParameter("@id", UserID));
+            list.Add(new SqlParameter("@cap", caption));
+            list.Add(new SqlParameter("@amount", amount));
+            list.Add(new SqlParameter("@type", actType));
+            list.Add(new SqlParameter("@createDate", DateTime.Now));
+            list.Add(new SqlParameter("@body", body));
+
+            try
+            {
+                DBHelper.ModifyData(connStr, dbCommand, list);
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex);
             }
         }
 
