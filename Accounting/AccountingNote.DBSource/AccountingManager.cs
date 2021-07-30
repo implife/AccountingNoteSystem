@@ -11,15 +11,9 @@ namespace AccountingNote.DBSource
 {
     public class AccountingManager
     {
-        public static string GetConnectionString()
-        {
-            string val = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            return val;
-        }
-
         public static DataTable GetAccountingList(string id)
         {
-            string connStr = GetConnectionString();
+            string connStr = DBHelper.GetConnectionString();
             string dbCommand = $@"
                 SELECT ID, Caption, Amount, ActType, CreateDate
                 FROM Accounting
@@ -65,7 +59,7 @@ namespace AccountingNote.DBSource
             if(actType != 0 && actType != 1)
                 throw new ArgumentException("ActType must be 0 or 1.");
 
-            string connectionString = GetConnectionString();
+            string connectionString = DBHelper.GetConnectionString();
             string dbCommandString =
                 @"INSERT INTO Accounting 
                     (UserID, Caption, Amount, ActType, createDate, Body)
@@ -104,7 +98,7 @@ namespace AccountingNote.DBSource
             if (actType != 0 && actType != 1)
                 throw new ArgumentException("ActType must be 0 or 1.");
 
-            string connectionString = GetConnectionString();
+            string connectionString = DBHelper.GetConnectionString();
             string dbCommandString =
                 @"UPDATE Accounting 
                   SET
@@ -149,7 +143,7 @@ namespace AccountingNote.DBSource
 
         public static DataRow GetAccounting(int id, string userID)
         {
-            string connStr = GetConnectionString();
+            string connStr = DBHelper.GetConnectionString();
             string dbCommand = $@"
                 SELECT ID, Caption, Amount, ActType, CreateDate, Body
                 FROM Accounting
@@ -187,7 +181,7 @@ namespace AccountingNote.DBSource
 
         public static bool DeleteAccounting(int id)
         {
-            string connStr = GetConnectionString();
+            string connStr = DBHelper.GetConnectionString();
             string dbCommand = $@"
                 DELETE FROM Accounting
                 WHERE ID = @id

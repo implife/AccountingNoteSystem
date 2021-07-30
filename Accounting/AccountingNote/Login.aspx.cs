@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using AccountingNote.Auth;
 using AccountingNote.DBSource;
 
 namespace AccountingNote
@@ -25,28 +26,16 @@ namespace AccountingNote
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            
-
             string inp_account = txtAccount.Text;
             string inp_PWD = txtPwd.Text;
 
-            if (string.IsNullOrWhiteSpace(inp_account) || string.IsNullOrWhiteSpace(inp_PWD))
+            string msg;
+            if(!AuthManager.TryLogin(inp_account, inp_PWD, out msg))
             {
-                this.ltlMsg.Text = "Account or Password is required.";
+                this.ltlMsg.Text = msg;
                 return;
             }
-
-            var dr = UserInfoManager.GetUserInfoByAccount(inp_account);
-            
-            if(dr != null && string.Compare(dr["PWD"].ToString(), inp_PWD) == 0)
-            {
-                this.Session["UserLoginInfo"] = dr["Account"];
-                Response.Redirect("/SystemAdmin/UserInfo.aspx");
-            }
-            else
-            {
-                this.ltlMsg.Text = "Login failed. Please check your account or password.";
-            }
+            Response.Redirect("/SystemAdmin/UserInfo.aspx");
         }
     }
 }
