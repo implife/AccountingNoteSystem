@@ -12,6 +12,11 @@ namespace AccountingNote.DBSource
     
     public class UserInfoManager
     {
+        /// <summary>
+        /// 輸入使用者帳戶名稱取得該使用者的DataRow
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns></returns>
         public static DataRow GetUserInfoByAccount(string account)
         {
             string connectionString = DBHelper.GetConnectionString();
@@ -37,6 +42,7 @@ namespace AccountingNote.DBSource
                         dt.Load(reader);
                         reader.Close();
 
+                        // 如果資料庫裡沒有這個使用者名稱，回傳null
                         if (dt.Rows.Count == 0)
                             return null;
 

@@ -2,6 +2,7 @@
 using AccountingNote.DBSource;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -13,7 +14,7 @@ namespace AccountingNote.SystemAdmin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // 先判斷是否是登入狀態
+            // 如果不是登入狀態就導回Login頁面
             if (!AuthManager.IsLogined())
             {
                 Response.Redirect("/Login.aspx");
@@ -21,7 +22,8 @@ namespace AccountingNote.SystemAdmin
             }
 
             UserInfoModel currentUser = AuthManager.GetCurrentUser();
-            // 可能被管理者砍帳號
+
+            // 資料庫中沒有該使用者資料，可能被管理者砍帳號
             if (currentUser == null)
             {
                 this.Session["UserLoginInfo"] = null;
@@ -33,20 +35,23 @@ namespace AccountingNote.SystemAdmin
             // 判斷是否為Post back，是的話不執行，否則會把輸入的東西蓋掉
             if (!IsPostBack)
             {
-                // Check is Create or Edit mode.
-                if (this.Request.QueryString["ID"] == null) // Create mode
+                // 判斷是新增模式還是修改模式，URL中沒有參數表示是新增模式
+                if (this.Request.QueryString["ID"] == null) // 新增模式
                 {
                     this.btnDelete.Visible = false;
                 }
-                else // Edit mode
+                else // 修改模式
                 {
                     this.btnDelete.Visible = true;
 
                     string idText = this.Request.QueryString["ID"];
+
+                    // 試著將id轉為整數
                     int id;
                     if (int.TryParse(idText, out id))
                     {
-                        var drAccounting = AccountingManager.GetAccounting(id, currentUser.ID);
+
+                        DataRow drAccounting = AccountingManager.GetAccounting(id, currentUser.ID);
 
                         if (drAccounting == null)
                         {
@@ -56,6 +61,7 @@ namespace AccountingNote.SystemAdmin
                         }
                         else
                         {
+                            // 將該使用者的該筆帳目顯示在畫面中
                             this.ddlType.SelectedValue = drAccounting["ActType"].ToString();
                             this.txtAmount.Text = drAccounting["Amount"].ToString();
                             this.txtCaption.Text = drAccounting["Caption"].ToString();
@@ -72,6 +78,11 @@ namespace AccountingNote.SystemAdmin
             }
         }
 
+        /// <summary>
+        /// 儲存紐按下時的事件。如果是新增模式就新建一筆帳目到資料庫，修改模式就變更資料庫裡的該筆帳目
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnSave_Click(object sender, EventArgs e)
         {
             // 檢查輸入值是否正確
@@ -82,10 +93,6 @@ namespace AccountingNote.SystemAdmin
                 this.ltlMsg.Text = string.Join("<br/>", msgList);
                 return;
             }
-
-            // 取得使用者資料(drUserInfo)
-            //string account = this.Session["UserLoginInfo"] as string;
-            //var drUserInfo = UserInfoManager.GetUserInfoByAccount(account);
 
             UserInfoModel currentUser = AuthManager.GetCurrentUser();
             if (currentUser == null)
@@ -102,17 +109,17 @@ namespace AccountingNote.SystemAdmin
             string caption = this.txtCaption.Text;
             string body = this.txtDesc.Text;
 
+            // 將輸入的金額和行為轉型成int
             int amount = Convert.ToInt32(amountText);
             int actType = Convert.ToInt32(actTypeText);
 
-            // Check Create mode or Edit mode.
+            // 判斷是新增模式還是修改模式，URL中沒有參數表示是新增模式
             string idText = this.Request.QueryString["ID"];
-
-            if (string.IsNullOrWhiteSpace(idText)) // Create
+            if (string.IsNullOrWhiteSpace(idText)) // 新增模式
             {
                 AccountingManager.CreateAccounting(userID, caption, amount, actType, body);
             }
-            else // Edit
+            else // 修改模式
             {
                 int id;
                 if (int.TryParse(idText, out id)) 
@@ -121,42 +128,6 @@ namespace AccountingNote.SystemAdmin
                 }
             }
             Response.Redirect("/SystemAdmin/AccountingList.aspx");
-        }
-
-        private bool CheckInput(out List<string> errMsgList)
-        {
-            List<string> msgList = new List<string>();
-
-            // type
-            if(this.ddlType.SelectedValue != "0" 
-                && this.ddlType.SelectedValue != "1")
-            {
-                msgList.Add("Type must be 0 or 1.");
-            }
-
-            // Amount
-            if (string.IsNullOrWhiteSpace(this.txtAmount.Text))
-            {
-                msgList.Add("Amount is required." + this.txtAmount.Text);
-            }
-            else
-            {
-                int tempInt;
-                if(!int.TryParse(this.txtAmount.Text, out tempInt))
-                {
-                    msgList.Add("Amount must be a number.");
-                }
-                if(tempInt < 0 || tempInt > 1000000)
-                {
-                    msgList.Add("Amount must between 0 and 1,000,000");
-                }
-            }
-            errMsgList = msgList;
-
-            if (msgList.Count == 0)
-                return true;
-            else
-                return false;
         }
 
         protected void btnDelete_Click(object sender, EventArgs e)
@@ -172,6 +143,47 @@ namespace AccountingNote.SystemAdmin
                 AccountingManager.DeleteAccounting(id);
             }
             Response.Redirect("/SystemAdmin/AccountingList.aspx");
+        }
+
+        /// <summary>
+        /// 檢查輸入直是否正確
+        /// </summary>
+        /// <param name="errMsgList">List傳出呼叫，裡面可放複數個錯誤訊息</param>
+        /// <returns>布林值，都沒有錯誤訊息回傳true，反之回傳false</returns>
+        private bool CheckInput(out List<string> errMsgList)
+        {
+            List<string> msgList = new List<string>();
+
+            // 檢查行為是否為0或1(支出或收入)
+            if (this.ddlType.SelectedValue != "0"
+                && this.ddlType.SelectedValue != "1")
+            {
+                msgList.Add("Type must be 0 or 1.");
+            }
+
+            // 檢查金額
+            if (string.IsNullOrWhiteSpace(this.txtAmount.Text))
+            {
+                msgList.Add("Amount is required." + this.txtAmount.Text);
+            }
+            else
+            {
+                int tempInt;
+                if (!int.TryParse(this.txtAmount.Text, out tempInt))
+                {
+                    msgList.Add("Amount must be a number.");
+                }
+                if (tempInt < 0 || tempInt > 1000000)
+                {
+                    msgList.Add("Amount must between 0 and 1,000,000");
+                }
+            }
+            errMsgList = msgList;
+
+            if (msgList.Count == 0)
+                return true;
+            else
+                return false;
         }
     }
 }

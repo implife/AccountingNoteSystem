@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace AccountingNote.Auth
 {
+    /// <summary>
+    /// 利用UserInfoModel類別就不用一直使用DataRow存取使用者資訊
+    /// </summary>
     public class UserInfoModel
     {
         public string ID { get; set; }
@@ -13,5 +16,6 @@ namespace AccountingNote.Auth
         public string PWD { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
+
     }
 }
