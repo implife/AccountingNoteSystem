@@ -100,7 +100,7 @@ namespace AccountingNote.SystemAdmin
                 Response.Redirect("/Login.aspx");
                 return;
             }
-            
+
             string userID = currentUser.ID;
 
             // 取得輸入值
@@ -122,7 +122,7 @@ namespace AccountingNote.SystemAdmin
             else // 修改模式
             {
                 int id;
-                if (int.TryParse(idText, out id)) 
+                if (int.TryParse(idText, out id))
                 {
                     AccountingManager.UpdateAccounting(id, userID, caption, amount, actType, body);
                 }

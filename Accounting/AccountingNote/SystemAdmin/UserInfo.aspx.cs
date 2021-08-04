@@ -1,8 +1,6 @@
 ﻿using AccountingNote.Auth;
-using AccountingNote.DBSource;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -36,6 +34,8 @@ namespace AccountingNote.SystemAdmin
                 this.ltlAccount.Text = currentUser.Account;
                 this.ltlName.Text = currentUser.Name;
                 this.ltlEmail.Text = currentUser.Email;
+                this.ltlUserLevel.Text = (currentUser.UserLevel == 0) ? "管理者" : "一般會員";
+                this.ltlCreateDate.Text = currentUser.CreateDate;
             }
         }
 

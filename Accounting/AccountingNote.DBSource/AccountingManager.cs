@@ -106,8 +106,8 @@ namespace AccountingNote.DBSource
             if (actType != 0 && actType != 1)
                 throw new ArgumentException("ActType must be 0 or 1.");
 
-            string connectionString = DBHelper.GetConnectionString();
-            string dbCommandString =
+            string connStr = DBHelper.GetConnectionString();
+            string dbCommand =
                 @"UPDATE Accounting 
                   SET
                     UserID          = @UserId
@@ -133,7 +133,7 @@ namespace AccountingNote.DBSource
             try
             {
                 // 呼叫ModifyData，回傳更動筆數
-                int effectRowsCount = DBHelper.ModifyData(connectionString, dbCommandString, list);
+                int effectRowsCount = DBHelper.ModifyData(connStr, dbCommand, list);
 
                 // 如果更動筆數為0，表示不成功，回傳false
                 if (effectRowsCount == 0)
@@ -212,6 +212,61 @@ namespace AccountingNote.DBSource
             {
                 Logger.WriteLog(ex);
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// 用傳出參數的方式取得帳目數量、初次記帳日期、最後記帳日期
+        /// </summary>
+        /// <param name="AccountingCount">帳目數量</param>
+        /// <param name="first">初次記帳日期，Nullable的DateTime</param>
+        /// <param name="last">最後記帳日期，Nullable的DateTime</param>
+        public static void GetAccountingInfo(out int AccountingCount, out DateTime? first, out DateTime? last)
+        {
+            string connStr = DBHelper.GetConnectionString();
+            string dbCommand = $@"
+                SELECT CreateDate
+                FROM Accounting
+            ";
+
+            try
+            {
+                // 要回傳多筆資料，使用ReadDataTable
+                DataTable dt = DBHelper.ReadDataTable(connStr, dbCommand, new List<SqlParameter>());
+                AccountingCount = dt.Rows.Count;
+
+                first = dt.Rows[0]["CreateDate"] as DateTime?;
+                last = dt.Rows[1]["CreateDate"] as DateTime?;
+                if (AccountingCount == 0)
+                {
+                    first = null;
+                    last = null;
+                }
+                else if (AccountingCount == 1)
+                {
+                    first = dt.Rows[0]["CreateDate"] as DateTime?;
+                    last = dt.Rows[0]["CreateDate"] as DateTime?;
+                }
+                else
+                {
+                    first = dt.Rows[0]["CreateDate"] as DateTime?;
+                    last = dt.Rows[0]["CreateDate"] as DateTime?;
+                    for (int i = 1; i < dt.Rows.Count; i++)
+                    {
+                        DateTime? dateI = dt.Rows[i]["CreateDate"] as DateTime?;
+                        if (dateI < first)
+                            first = dateI;
+                        if (dateI > last)
+                            last = dateI;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex);
+                AccountingCount = 0;
+                first = null;
+                last = null;
             }
         }
 

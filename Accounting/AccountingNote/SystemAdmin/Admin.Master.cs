@@ -5,10 +5,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace AccountingNote
+namespace AccountingNote.SystemAdmin
 {
-    public partial class About : System.Web.UI.Page
+    public partial class Admin : System.Web.UI.MasterPage
     {
+        public string MyTitle { get; set; } = string.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
 

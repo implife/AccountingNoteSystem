@@ -7,56 +7,47 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AccountingNote
+namespace AccountingNote.UserControls
 {
 
 
-    public partial class Default
+    public partial class ucPager
     {
 
         /// <summary>
-        /// form1 control.
+        /// lblPageInfo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Label lblPageInfo;
 
         /// <summary>
-        /// lblFirstDate control.
+        /// HLinkFirst control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFirstDate;
+        protected global::System.Web.UI.WebControls.HyperLink HLinkFirst;
 
         /// <summary>
-        /// lblLastDate control.
+        /// ltPager control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblLastDate;
+        protected global::System.Web.UI.WebControls.Literal ltPager;
 
         /// <summary>
-        /// lblAccountQuantity control.
+        /// HLinkLast control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAccountQuantity;
-
-        /// <summary>
-        /// lblUserQuantity control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUserQuantity;
+        protected global::System.Web.UI.WebControls.HyperLink HLinkLast;
     }
 }

@@ -50,6 +50,8 @@ namespace AccountingNote.Auth
             model.Account = dr["Account"].ToString();
             model.Name = dr["Name"].ToString();
             model.Email = dr["Email"].ToString();
+            model.UserLevel = int.Parse(dr["UserLevel"].ToString());
+            model.CreateDate = dr["CreateDate"].ToString();
 
             return model;
         }

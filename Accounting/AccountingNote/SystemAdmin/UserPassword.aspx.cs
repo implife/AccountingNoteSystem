@@ -19,8 +19,8 @@ namespace AccountingNote.SystemAdmin
         }
 
         // 變更的button click事件
-            // 判斷輸入值是否正確，新密碼跟確認新密碼是否一樣
-            // 輸入值正確的話就呼叫UpdateUserInfo(在UserInfoManager新建方法)
+        // 判斷輸入值是否正確，新密碼跟確認新密碼是否一樣
+        // 輸入值正確的話就呼叫UpdateUserInfo(在UserInfoManager新建方法)
 
 
         // 取消的button click事件，跳頁至UserDetail.aspx

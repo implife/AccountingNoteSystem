@@ -41,6 +41,8 @@ namespace AccountingNote.DBSource
                         dt.Load(reader);
                         reader.Close();
 
+                        if (dt.Rows.Count == 0)
+                            return null;
                         return dt;
                     }
                     catch (Exception ex)

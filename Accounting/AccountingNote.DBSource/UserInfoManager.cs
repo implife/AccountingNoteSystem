@@ -16,46 +16,78 @@ namespace AccountingNote.DBSource
         /// 輸入使用者帳戶名稱取得該使用者的DataRow
         /// </summary>
         /// <param name="account"></param>
-        /// <returns></returns>
+        /// <returns>找不到該用戶時回傳null</returns>
         public static DataRow GetUserInfoByAccount(string account)
         {
-            string connectionString = DBHelper.GetConnectionString();
-            string dbCommandString =
-                @"SELECT [ID], [Account], [PWD], [Name], [Email]
+            string connStr = DBHelper.GetConnectionString();
+            string dbCommand =
+                @"SELECT [ID], [Account], [PWD], [Name], [Email], [UserLevel], [CreateDate]
                     FROM UserInfo
                     WHERE [Account] = @account
                 ";
+            // 將參數查詢時需要的參數放進SqlParameter物件，再放進list裡面
+            List<SqlParameter> list = new List<SqlParameter>();
+            list.Add(new SqlParameter("@account", account));
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+
+            try
             {
-                using (SqlCommand command = new SqlCommand(dbCommandString, connection))
-                {
-                    command.Parameters.AddWithValue("@account", account);
+                return DBHelper.ReadDataRow(connStr, dbCommand, list);
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex);
+                return null;
+            }
+            
+        }
 
-                    try
-                    {
-                        connection.Open();
+        /// <summary>
+        /// 取得所有會員的資料
+        /// </summary>
+        /// <returns>所有會員的DataTable</returns>
+        public static DataTable GetUserInfoList()
+        {
+            string connStr = DBHelper.GetConnectionString();
+            string dbCommand =
+                @"SELECT [ID], [Account], [PWD], [Name], [Email], [UserLevel], [CreateDate]
+                    FROM UserInfo
+                ";
 
-                        SqlDataReader reader = command.ExecuteReader();
-
-                        DataTable dt = new DataTable();
-                        dt.Load(reader);
-                        reader.Close();
-
-                        // 如果資料庫裡沒有這個使用者名稱，回傳null
-                        if (dt.Rows.Count == 0)
-                            return null;
-
-                        return dt.Rows[0];
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.WriteLog(ex);
-                        return null;
-                    }
-                }
+            try
+            {
+                // 要回傳多筆資料，使用ReadDataTable
+                return DBHelper.ReadDataTable(connStr, dbCommand, new List<SqlParameter>());
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex);
+                return null;
             }
         }
 
+        /// <summary>
+        /// 取得所有會員的數量
+        /// </summary>
+        /// <returns>所有會員的數量</returns>
+        public static int GetUserQuantity()
+        {
+            string connStr = DBHelper.GetConnectionString();
+            string dbCommand =
+                @"SELECT [ID], [Account], [PWD], [Name], [Email], [UserLevel], [CreateDate]
+                    FROM UserInfo
+                ";
+            try
+            {
+                DataTable dt = DBHelper.ReadDataTable(connStr, dbCommand, new List<SqlParameter>());
+
+                return dt.Rows.Count;
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex);
+                return 0;
+            }
+        }
     }
 }

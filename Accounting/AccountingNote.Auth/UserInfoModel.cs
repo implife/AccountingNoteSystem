@@ -16,6 +16,8 @@ namespace AccountingNote.Auth
         public string PWD { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
+        public int UserLevel { get; set; }
+        public string CreateDate { get; set; }
 
     }
 }
