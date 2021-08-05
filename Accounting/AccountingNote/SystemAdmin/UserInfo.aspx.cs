@@ -43,6 +43,7 @@ namespace AccountingNote.SystemAdmin
         {
             AuthManager.Logout();
             Response.Redirect("/Login.aspx");
+
         }
     }
 }
