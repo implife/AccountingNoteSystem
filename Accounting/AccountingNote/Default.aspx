@@ -29,7 +29,7 @@
        
     	.auto-style13 {
 			height: 63px;
-			width: 1473px;
+			width: 100%;
 			margin-left: 0px;
 			margin-right: 0px;
 			margin-top: 0px;

@@ -39,7 +39,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
-	<asp:GridView ID="gvAccountingList" runat="server" AutoGenerateColumns="False" OnRowDataBound="gvAccountingList_RowDataBound" BackColor="White" BorderColor="#3366CC" BorderStyle="None" BorderWidth="1px" CellPadding="4" CssClass="auto-style8" Width="423px">
+	<asp:GridView ID="gvAccountingList" runat="server" AutoGenerateColumns="False" OnRowDataBound="gvAccountingList_RowDataBound" CellPadding="4" CssClass="auto-style8" Width="423px" ForeColor="#333333" GridLines="None">
+		<AlternatingRowStyle BackColor="White" />
 		<columns>
 			<asp:BoundField HeaderText="標題" DataField="Caption" />
 			<asp:BoundField HeaderText="金額" DataField="Amount" />
@@ -60,15 +61,17 @@
 
 		</columns>
 
-		<footerstyle backcolor="#99CCCC" forecolor="#003399" />
-		<headerstyle backcolor="#003399" font-bold="True" forecolor="#CCCCFF" />
-		<pagerstyle backcolor="#99CCCC" forecolor="#003399" horizontalalign="Left" />
-		<rowstyle backcolor="White" forecolor="#003399" />
-		<selectedrowstyle backcolor="#009999" font-bold="True" forecolor="#CCFF99" />
-		<sortedascendingcellstyle backcolor="#EDF6F6" />
-		<sortedascendingheaderstyle backcolor="#0D4AC4" />
-		<sorteddescendingcellstyle backcolor="#D6DFDF" />
-		<sorteddescendingheaderstyle backcolor="#002876" />
+		<EditRowStyle BackColor="#2461BF" />
+
+		<footerstyle backcolor="#507CD1" forecolor="White" Font-Bold="True" />
+		<headerstyle backcolor="#507CD1" font-bold="True" forecolor="White" />
+		<pagerstyle backcolor="#2461BF" forecolor="White" horizontalalign="Center" />
+		<rowstyle backcolor="#EFF3FB" />
+		<selectedrowstyle backcolor="#D1DDF1" font-bold="True" forecolor="#333333" />
+		<sortedascendingcellstyle backcolor="#F5F7FB" />
+		<sortedascendingheaderstyle backcolor="#6D95E1" />
+		<sorteddescendingcellstyle backcolor="#E9EBEF" />
+		<sorteddescendingheaderstyle backcolor="#4870BE" />
 
 	</asp:GridView>
 

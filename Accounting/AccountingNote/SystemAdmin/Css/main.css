@@ -1,8 +1,12 @@
 ﻿body {
     position: relative;
-    width: 1440px;
-    height: 1024px;
+    width: 100vw;
+    height: 100vh;
     background: linear-gradient(239.44deg, #A3BCFF 10.12%, rgba(205, 204, 255, 0.686155) 47.79%, rgba(242, 152, 222, 0) 86.33%), linear-gradient(243.43deg, #B96BD5 0%, rgba(255, 255, 255, 0) 60.68%), linear-gradient(59.9deg, rgba(0, 0, 0, 0.2) 50.35%, rgba(228, 171, 255, 0) 82.71%), rgba(181, 135, 255, 0.99);
+}
+
+form{
+    position:relative;
 }
 
 #div1 {
@@ -14,12 +18,10 @@
     border-radius: 20px;
     opacity: 0.9;
     box-shadow: 5px 5px 30px rgb(0, 0, 0);
-    position:absolute;
+    position: absolute;
     width: 600px;
     height: 590px;
-    left: 50%;
-    top: 50%;
-    margin:-320px 0 0 -240px;
+    left: 30%;
 }
 
 #div2 {
@@ -43,7 +45,7 @@
     background-color: #f9f9f9;
     min-width: 90px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
-    padding: 12px 16px;
+    padding: 12px 0px;
     z-index: 1;
 }
 
@@ -62,11 +64,15 @@ img {
     cursor: pointer;
 }
 
-#MenuCont >a {
+#MenuCont > a {
     color: black;
     text-decoration: none;
     padding: 5px;
     display: block;
+}
+#MenuCont > a:hover {
+    background-color: #a8abef;
+    color: #000;
 }
 #CTDiv{
     width:100%;
