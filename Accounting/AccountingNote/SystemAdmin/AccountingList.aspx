@@ -46,7 +46,7 @@
 
 			<asp:TemplateField HeaderText="In / Out">
 				<itemtemplate>
-					<asp:Label ID="lblActType" runat="server" Text="Label"></asp:Label>
+					<asp:Label ID="lblActType" runat="server" Text=""></asp:Label>
 				</itemtemplate>
 			</asp:TemplateField>
 

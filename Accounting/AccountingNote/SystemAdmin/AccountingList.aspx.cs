@@ -37,7 +37,7 @@ namespace AccountingNote.SystemAdmin
             DataTable dt = AccountingManager.GetAccountingList(currentUser.ID);
 
             // 檢查帳目數量是否為0
-            if (dt.Rows.Count > 0)
+            if (dt != null)
             {
                 // 根據現在所在頁面設定GridView的內容
                 DataTable dtPaged = this.GetPagedDataTable(dt, this.ucPager.PageSize);
@@ -62,6 +62,9 @@ namespace AccountingNote.SystemAdmin
             {
                 this.gvAccountingList.Visible = false;
                 this.plcNoData.Visible = true;  // 將No Data資訊的PlaceHolder顯示出來
+                this.ucPager.Visible = false;
+                this.lblTotalAmount.Visible = false;
+                return;
             }
 
             // 取得所有帳目的Amount並算出小計總額
