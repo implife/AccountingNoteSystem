@@ -43,5 +43,5 @@
             </td>
         </tr>
     </table>
-    <asp:Button ID="btnLogout" runat="server" Text="Log Out" OnClick="btnLogout_Click" Visible="false"  />
+    <%--<asp:Button ID="btnLogout" runat="server" Text="Log Out" OnClick="btnLogout_Click" Visible="false"  />--%>
 </asp:Content>
