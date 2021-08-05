@@ -13,7 +13,7 @@ namespace AccountingNote.DBSource
     public class UserInfoManager
     {
         /// <summary>
-        /// 輸入使用者帳戶名稱取得該使用者的DataRowjkljkljkl
+        /// 輸入使用者帳戶名稱取得該使用者的DataRow
         /// </summary>
         /// <param name="account"></param>
         /// <returns>找不到該用戶時回傳null</returns>
