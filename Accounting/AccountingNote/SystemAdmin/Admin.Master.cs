@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccountingNote.Auth;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,13 @@ namespace AccountingNote.SystemAdmin
         public string MyTitle { get; set; } = string.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
+
+        }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            AuthManager.Logout();
+            Response.Redirect("/Login.aspx");
 
         }
     }
