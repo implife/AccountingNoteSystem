@@ -7,9 +7,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h2>會員管理</h2>
     <div>
-        <asp:Button ID="btnAdd" runat="server" Text="新增" OnClick="btnAdd_Click" />
+        <asp:Button ID="btnAdd" runat="server" Text="新增" OnClick="btnAdd_Click" Font-Size="Medium" Height="36px" Width="79px" />
     </div>
-    <asp:GridView ID="gvUserList" runat="server" AutoGenerateColumns="false" OnRowDataBound="gvUserList_RowDataBound">
+    <asp:GridView ID="gvUserList" runat="server" AutoGenerateColumns="False" OnRowDataBound="gvUserList_RowDataBound" BackColor="White" BorderColor="#3366CC" BorderStyle="None" BorderWidth="1px" CellPadding="4">
         <Columns>
             <asp:BoundField HeaderText="帳號" DataField="Account" />
             <asp:BoundField HeaderText="姓名" DataField="Name" />
@@ -29,6 +29,15 @@
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
+    	<FooterStyle BackColor="#99CCCC" ForeColor="#003399" />
+		<HeaderStyle BackColor="#003399" Font-Bold="True" ForeColor="#CCCCFF" />
+		<PagerStyle BackColor="#99CCCC" ForeColor="#003399" HorizontalAlign="Left" />
+		<RowStyle BackColor="White" ForeColor="#003399" />
+		<SelectedRowStyle BackColor="#009999" Font-Bold="True" ForeColor="#CCFF99" />
+		<SortedAscendingCellStyle BackColor="#EDF6F6" />
+		<SortedAscendingHeaderStyle BackColor="#0D4AC4" />
+		<SortedDescendingCellStyle BackColor="#D6DFDF" />
+		<SortedDescendingHeaderStyle BackColor="#002876" />
     </asp:GridView>
     <%--<uc1:ucPager runat="server" id="ucPager" />--%>
 </asp:Content>
