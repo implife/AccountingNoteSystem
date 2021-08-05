@@ -19,7 +19,6 @@
 
             <asp:TemplateField HeaderText="In / Out">
                 <ItemTemplate>
-
                     <asp:Label ID="lblActType" runat="server" Text="Label"></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
@@ -36,7 +35,10 @@
 
     </asp:GridView>
 
-    <uc1:ucPager runat="server" ID="ucPager" url="AccountingList.aspx" pagesize="3" totalsize="10" currentpage="1"/>
+    <uc1:ucPager runat="server" ID="ucPager" url="AccountingList.aspx" pagesize="8" totalsize="10" currentpage="1"/>
+
+    <%--<asp:Label ID="lblTest" runat="server" Text="Test:"></asp:Label>--%>
+
 
     <asp:PlaceHolder ID="plcNoData" runat="server" Visible="false">
         <p>
