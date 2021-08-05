@@ -44,10 +44,9 @@
             </td>
         </tr>
     </table>
-    <asp:Button ID="btnSave" runat="server" Text="儲存" />
+    <asp:Button ID="btnSave" runat="server" Text="儲存" OnClick="btnSave_Click" />
+    <br />
     <asp:Literal ID="ltlMsg" runat="server"></asp:Literal>
 
-
-    <asp:Literal ID="ltlTest" runat="server"></asp:Literal>
 
 </asp:Content>

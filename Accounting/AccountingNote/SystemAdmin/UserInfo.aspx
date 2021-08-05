@@ -2,29 +2,38 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 	<style>
-        th {
-            text-align: right;
-        }
-        td{ text-align:left;
-            padding: 3px 5px;
-        }
-	    table {text-align:center}
-    	.auto-style3 {
-			width: 973px;
-		}
-		.auto-style4 {
-			width: 112px;
-		}
-    	.auto-style5 {
-			width: 196px;
-		}
-    	.auto-style7 {
-			width: 324px;
-		}
-    </style>
+	    th {
+	        text-align: right;
+	    }
+
+	    td {
+	        text-align: left;
+	        padding: 3px 5px;
+	    }
+
+	    table {
+	        text-align: center
+	    }
+
+	    .auto-style3 {
+	        width: 973px;
+	    }
+
+	    .auto-style4 {
+	        width: 112px;
+	    }
+
+	    .auto-style5 {
+	        width: 196px;
+	    }
+
+	    .auto-style7 {
+	        width: 324px;
+	    }
+	</style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-	<div style="text-align: left";> <h3 >使用者資訊:</h3>
+	<h3 >使用者資訊:</h3>
    
 	<table>
         <tr>
@@ -58,5 +67,4 @@
             </td>
         </tr>
     </table>
-    <%--<asp:Button ID="btnLogout" runat="server" Text="Log Out" OnClick="btnLogout_Click" Visible="false"  />--%>
 </asp:Content>

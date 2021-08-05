@@ -112,6 +112,93 @@ namespace AccountingNote.DBSource
         }
 
         /// <summary>
+        /// 變更會員密碼
+        /// </summary>
+        /// <param name="userID">驗證使用者的userID</param>
+        /// <param name="account">驗證使用者的Account</param>
+        /// <param name="newPWD">新密碼</param>
+        /// <returns></returns>
+        public static bool UpdateUserPWD(string userID, string account, string newPWD)
+        {
+            string connStr = DBHelper.GetConnectionString();
+            string dbCommand =
+                @"UPDATE UserInfo 
+                  SET
+                    PWD = @PWD
+                 WHERE
+                    ID = @UserID AND Account = @Account
+                ";
+            // 將參數查詢時需要的參數放進SqlParameter物件，再放進list裡面
+            List<SqlParameter> list = new List<SqlParameter>();
+            list.Add(new SqlParameter("@PWD", newPWD));
+            list.Add(new SqlParameter("@UserID", userID));
+            list.Add(new SqlParameter("@Account", account));
+
+            try
+            {
+                // 呼叫ModifyData，回傳更動筆數
+                int effectRowsCount = DBHelper.ModifyData(connStr, dbCommand, list);
+
+                // 如果更動筆數為0，表示不成功，回傳false
+                if (effectRowsCount == 0)
+                    return false;
+                else
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex);
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 新增會員
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="PWD"></param>
+        /// <param name="name"></param>
+        /// <param name="Email"></param>
+        /// <param name="userLevel"></param>
+        /// <returns></returns>
+        public static bool CreateUserInfo(string account, string PWD, string name, string Email, int userLevel)
+        {
+            string connStr = DBHelper.GetConnectionString();
+            string dbCommand =
+                @"INSERT INTO UserInfo 
+                    (ID, Account, PWD, Name, Email, UserLevel)
+                    VALUES 
+                    (@UserID, @Account, @PWD, @Name, @Email, @UserLevel);
+                ";
+
+            // 將參數查詢時需要的參數放進SqlParameter物件，再放進list裡面
+            List<SqlParameter> list = new List<SqlParameter>();
+            list.Add(new SqlParameter("@UserID", Guid.NewGuid().ToString()));
+            list.Add(new SqlParameter("@Account", account));
+            list.Add(new SqlParameter("@PWD", PWD));
+            list.Add(new SqlParameter("@Name", name));
+            list.Add(new SqlParameter("@Email", Email));
+            list.Add(new SqlParameter("@UserLevel", userLevel));
+
+            try
+            {
+                // 呼叫ModifyData，回傳更動筆數
+                int effectRowsCount = DBHelper.ModifyData(connStr, dbCommand, list);
+
+                // 如果更動筆數為0，表示不成功，回傳false
+                if (effectRowsCount == 0)
+                    return false;
+                else
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex);
+                return false;
+            }
+        }
+
+        /// <summary>
         /// 取得所有會員的數量
         /// </summary>
         /// <returns>所有會員的數量</returns>
