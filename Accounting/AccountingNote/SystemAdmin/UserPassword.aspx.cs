@@ -20,7 +20,7 @@ namespace AccountingNote.SystemAdmin
             }
 
             UserInfoModel currentUser = AuthManager.GetCurrentUser();
-            string account = Request.QueryString["UID"];
+            string accountUID = Request.QueryString["UID"];
 
             // 資料庫中沒有該使用者資料，可能被管理者砍帳號
             if (currentUser == null)
@@ -31,7 +31,7 @@ namespace AccountingNote.SystemAdmin
             }
 
             // 確認UID是否正確
-            if (string.Compare(account, currentUser.ID) != 0)
+            if (string.Compare(accountUID, currentUser.ID) != 0)
             {
                 this.ltlMsg.Text = "UID is not correct.";
                 return;
@@ -42,9 +42,9 @@ namespace AccountingNote.SystemAdmin
             {
                 this.lblAccount.Text = currentUser.Account;
 
+                this.ltlTitle.Text = "會員管理 - 變更密碼";
                 this.plcOriginalPWD.Visible = true;
                 this.btnSave.Text = "變更";
-                this.ltlTitle.Text = "會員管理 - 變更密碼";
 
             }
             else // 新增會員模式
@@ -52,9 +52,9 @@ namespace AccountingNote.SystemAdmin
                 UserInfoModel model = this.Session["CreateUserInfo"] as UserInfoModel;
                 this.lblAccount.Text = model.Account;
 
+                this.ltlTitle.Text = "會員管理 - 新增會員";
                 this.plcOriginalPWD.Visible = false;
                 this.btnSave.Text = "建立";
-                this.ltlTitle.Text = "會員管理 - 新增會員";
             }
 
             // PostBack的話還是將輸入的密碼還原
