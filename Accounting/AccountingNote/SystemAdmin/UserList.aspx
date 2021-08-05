@@ -3,9 +3,12 @@
 <%@ Register Src="~/UserControls/ucPager.ascx" TagPrefix="uc1" TagName="ucPager" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <title>會員管理</title>
 </asp:Content>
+
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h2>&nbsp;會員管理</h2>
+    <h2>會員管理</h2>
     <div style="width: 289px; margin-left: 149px">
        
         <asp:Button ID="btnAdd" runat="server" Text="新增" OnClick="btnAdd_Click" />
