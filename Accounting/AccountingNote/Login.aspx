@@ -30,7 +30,7 @@
 
     <form id="form1" runat="server" class="auto-style3">
         <br/>
-    <asp:Label ID="Label1" runat="server" Text="登入頁面" Font-Size="XX-Large" BackColor="#D7F7FF" BorderColor="White" ForeColor="Black" BorderStyle="None" Font-Bold="True" Font-Italic="False" CssClass="auto-style2" Height="41px" Width="185px"></asp:Label>
+    <asp:Label ID="Label1" runat="server" Text="登入頁面" Font-Size="XX-Large" BorderColor="White" ForeColor="Black" BorderStyle="None" Font-Bold="True" Font-Italic="False" CssClass="auto-style2" Height="41px" Width="185px"></asp:Label>
     	<br />
     
     <br />

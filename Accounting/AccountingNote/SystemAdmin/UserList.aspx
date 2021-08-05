@@ -3,14 +3,31 @@
 <%@ Register Src="~/UserControls/ucPager.ascx" TagPrefix="uc1" TagName="ucPager" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+	<style type="text/css">
+		.auto-style4 {
+			margin-left: 87px;
+		}
+		.auto-style5 {
+			width: 289px;
+			margin-left: 90px;
+		}
+		.auto-style6 {
+			margin-left: 0px;
+			width: 596px;
+		}
+		.auto-style7 {
+			height: 42px;
+			width: 608px;
+		}
+	</style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h2>&nbsp;會員管理</h2>
-    <div style="width: 289px; margin-left: 149px">
+	<div class="auto-style7"><h2 align="center" class="auto-style6">&nbsp;會員管理</h2></div>
+    <div class="auto-style5">
        
         <asp:Button ID="btnAdd" runat="server" Text="新增" OnClick="btnAdd_Click" />
     </div>
-    <asp:GridView ID="gvUserList" runat="server" AutoGenerateColumns="false" OnRowDataBound="gvUserList_RowDataBound" style="margin-left: 149px">
+    <asp:GridView ID="gvUserList" runat="server" AutoGenerateColumns="false" OnRowDataBound="gvUserList_RowDataBound" CssClass="auto-style4">
         <Columns>
             <asp:BoundField HeaderText="帳號" DataField="Account" />
             <asp:BoundField HeaderText="姓名" DataField="Name" />

@@ -5,35 +5,37 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 	<style type="text/css">
-		.auto-style4 {
+		.auto-stylem {
 			width: 419px;
 			height: 25px;
 			margin-left: 4px;
 		}
 		.auto-style8 {
-			margin-left: 4px;
+			margin-left:90px;
+			
 		}
-		.auto-style9 {
+		.auto-stylenew {
 			width: 415px;
-			margin-left: 6px;
+			margin-left: 88px;
 		}
 		.auto-style10 {
 			margin-left: 0px;
 		}
-		.auto-style11 {
+		.auto-stylepage {
 			width: 425px;
-			margin-left: 0px;
+			margin-left: 80px;
+			text-align:center
+		}
+		.auto-style12 {
+			width: 509px;
+			height: 25px;
+			margin-left: 4px;
 		}
 	</style>
 </asp:Content>
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-
-	<div style="text-align: left" class="auto-style9">
-		<asp:Button ID="btnCreate" runat="server" Text="新增" OnClick="btnCreate_Click" Height="33px" Width="65px" CssClass="auto-style10" Font-Bold="True" ToolTip="新增帳目" Font-Size="Medium" />
-	</div>
 
 
 	<asp:GridView ID="gvAccountingList" runat="server" AutoGenerateColumns="False" OnRowDataBound="gvAccountingList_RowDataBound" BackColor="White" BorderColor="#3366CC" BorderStyle="None" BorderWidth="1px" CellPadding="4" CssClass="auto-style8" Width="423px">
@@ -69,23 +71,32 @@
 
 	</asp:GridView>
 
-	<div style="text-align: right" class="auto-style4">
+	<div style="text-align: right" class="auto-style12">
 		<asp:Label ID="lblTotalAmount" runat="server" Text="小記: 元" Font-Bold="False"></asp:Label>
 	</div>
+
+
+	<div style="text-align: left" class="auto-stylenew">
+		<asp:Button ID="btnCreate" runat="server" Text="新增" OnClick="btnCreate_Click" Height="33px" Width="65px" CssClass="auto-style10" Font-Bold="True" ToolTip="新增帳目" Font-Size="Medium" />
+	</div>
+
+
 	<br />
 
 
 	<br />
-	<div class="auto-style11">
+	<div class="auto-stylepage">
 		<uc1:ucpager runat="server" id="ucPager" url="AccountingList.aspx" pagesize="8" totalsize="10" currentpage="1" />
 	</div>
-	<br />
 	<div style="text-align: center" class="auto-style11">
-
 		<asp:PlaceHolder ID="plcNoData" runat="server" Visible="false">
 			<p>
 				No Data in your Accounting Note.
 			</p>
 		</asp:PlaceHolder>
-	</div>
+		</div>
+
+	
+
+	
 </asp:Content>

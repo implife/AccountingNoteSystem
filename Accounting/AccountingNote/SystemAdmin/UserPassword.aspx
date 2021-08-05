@@ -2,6 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
+       
         table.UserPasswordEdit th{
             text-align: right;
         }
@@ -11,10 +12,10 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h2>
+    <h2 align="center">
         <asp:Literal ID="ltlTitle" runat="server"></asp:Literal>
     </h2>
-    <table class="UserPasswordEdit">
+    <table align="center" class="UserPasswordEdit">
         <tr>
             <th>帳號</th>
             <td>
@@ -44,7 +45,7 @@
             </td>
         </tr>
     </table>
-    <asp:Button ID="btnSave" runat="server" Text="儲存" OnClick="btnSave_Click" />
+    <asp:Button centerID="btnSave" runat="server" Text="儲存" OnClick="btnSave_Click" />
     <br />
     <asp:Literal ID="ltlMsg" runat="server"></asp:Literal>
 
