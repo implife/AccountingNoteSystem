@@ -29,12 +29,14 @@
             <th>姓名</th>
             <td>
                 <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+                <asp:Label ID="lblName" runat="server" Text="--"></asp:Label>
             </td>
         </tr>
         <tr>
             <th>Email</th>
             <td>
                 <asp:TextBox ID="txtEmail" runat="server" TextMode="Email"></asp:TextBox>
+                <asp:Label ID="lblEmail" runat="server" Text="--"></asp:Label>
             </td>
         </tr>
         <tr>

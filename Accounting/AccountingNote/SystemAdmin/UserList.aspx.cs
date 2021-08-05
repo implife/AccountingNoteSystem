@@ -46,8 +46,9 @@ namespace AccountingNote.SystemAdmin
         protected void gvUserList_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             GridViewRow gvRow = e.Row;
+            UserInfoModel currentUser = AuthManager.GetCurrentUser();
 
-            if(gvRow.RowType == DataControlRowType.DataRow)
+            if (gvRow.RowType == DataControlRowType.DataRow)
             {
                 // 將UserLevel的0和1換成管理員和一般會員
                 Label lbl = gvRow.FindControl("lblUserLevel") as Label;
@@ -59,12 +60,18 @@ namespace AccountingNote.SystemAdmin
                 else
                     lbl.Text = "一般會員";
 
-                // 設定編輯的超連結，並只能編輯自己的資料
+                // 設定編輯的超連結，並只能編輯自己的資料，管理者可進入所有人的編輯頁面
                 HyperLink link = gvRow.FindControl("linkEdit") as HyperLink;
-                string account = HttpContext.Current.Session["UserLoginInfo"] as string;
 
-                if (string.Compare(dr.Field<string>("Account"), account) == 0)
+                if(currentUser.UserLevel == 0)
+                {
                     link.NavigateUrl = "/SystemAdmin/UserDetail.aspx?UID=" + dr["ID"].ToString();
+                }
+                else
+                {
+                    if (string.Compare(dr.Field<string>("Account"), currentUser.Account) == 0)
+                        link.NavigateUrl = "/SystemAdmin/UserDetail.aspx?UID=" + dr["ID"].ToString();
+                }
             }
         }
 

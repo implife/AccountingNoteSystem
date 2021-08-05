@@ -26,10 +26,9 @@
             <asp:TemplateField HeaderText="Act">
                 <ItemTemplate>
                     <asp:HyperLink ID="linkEdit" runat="server">編輯</asp:HyperLink>
-                    <%--<a href="/SystemAdmin/UserDetail.aspx?UID=<%# Eval("ID") %>">編輯</a>--%>
                 </ItemTemplate>
             </asp:TemplateField>
+
         </Columns>
     </asp:GridView>
-    <%--<uc1:ucPager runat="server" id="ucPager" />--%>
 </asp:Content>

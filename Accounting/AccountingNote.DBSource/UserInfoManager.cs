@@ -42,6 +42,31 @@ namespace AccountingNote.DBSource
             
         }
 
+        public static DataRow GetUserInfoByUserID(string userID)
+        {
+            string connStr = DBHelper.GetConnectionString();
+            string dbCommand =
+                @"SELECT [ID], [Account], [PWD], [Name], [Email], [UserLevel], [CreateDate]
+                    FROM UserInfo
+                    WHERE [ID] = @userID
+                ";
+            // 將參數查詢時需要的參數放進SqlParameter物件，再放進list裡面
+            List<SqlParameter> list = new List<SqlParameter>();
+            list.Add(new SqlParameter("@userID", userID));
+
+            try
+            {
+                return DBHelper.ReadDataRow(connStr, dbCommand, list);
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex);
+                return null;
+            }
+
+        }
+
+
         /// <summary>
         /// 取得所有會員的資料
         /// </summary>
@@ -186,6 +211,36 @@ namespace AccountingNote.DBSource
                 int effectRowsCount = DBHelper.ModifyData(connStr, dbCommand, list);
 
                 // 如果更動筆數為0，表示不成功，回傳false
+                if (effectRowsCount == 0)
+                    return false;
+                else
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex);
+                return false;
+            }
+        }
+
+        public static bool DeleteUserInfo(string userID)
+        {
+            string connStr = DBHelper.GetConnectionString();
+            string dbCommand = $@"
+                DELETE FROM UserInfo
+                WHERE ID = @userID
+            ";
+
+            // 將參數查詢時需要的參數放進SqlParameter物件，再放進list裡面
+            List<SqlParameter> list = new List<SqlParameter>();
+            list.Add(new SqlParameter("@userID", userID));
+
+            try
+            {
+                // 呼叫ModifyData，回傳更動筆數
+                int effectRowsCount = DBHelper.ModifyData(connStr, dbCommand, list);
+
+                // 若更動筆數為0表示刪除不成功，回傳false
                 if (effectRowsCount == 0)
                     return false;
                 else
