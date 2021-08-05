@@ -44,9 +44,19 @@ namespace AccountingNote.SystemAdmin
                 this.gvAccountingList.DataSource = dtPaged;
                 this.gvAccountingList.DataBind();
 
+
                 // 設定ucPager的內容
-                this.ucPager.TotalSize = dt.Rows.Count;
-                this.ucPager.Bind();
+                if (dt.Rows.Count <= this.ucPager.PageSize)
+                {
+                    this.ucPager.Visible = false;
+                }
+                else
+                {
+                    this.ucPager.TotalSize = dt.Rows.Count;
+                    this.ucPager.Bind();
+                }
+
+
             }
             else
             {
@@ -56,7 +66,7 @@ namespace AccountingNote.SystemAdmin
 
             // 取得所有帳目的Amount並算出小計總額
             int sum = 0;
-            foreach(DataRow item in dt.Rows)
+            foreach (DataRow item in dt.Rows)
             {
                 if ((int)item["ActType"] == 0)
                     sum -= (int)item["Amount"];
