@@ -2,6 +2,7 @@
 using AccountingNote.DBSource;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -20,6 +21,7 @@ namespace AccountingNote.SystemAdmin
             }
 
             UserInfoModel currentUser = AuthManager.GetCurrentUser();
+            string accountUID = this.Request.QueryString["UID"];
 
             // 資料庫中沒有該使用者資料，可能被管理者砍帳號
             if (currentUser == null)
@@ -35,57 +37,87 @@ namespace AccountingNote.SystemAdmin
                 this.Session["CreateUserInfo"] = null;
 
                 // 判斷是新增模式還是修改模式
-                if (this.Request.QueryString["UID"] == null) // 新增模式
+                if (accountUID == null) // 新增模式
                 {
                     // 新增模式的話沒有delete和password的按鈕，並可輸入帳號、姓名、Email、會員等級
+                    this.btnSave.Text = "下一步";
                     this.btnDelete.Visible = false;
                     this.btnPassword.Visible = false;
 
                     this.lblAccount.Visible = false;
-                    this.txtAccount.Visible = true;
+                    this.lblName.Visible = false;
+                    this.lblEmail.Visible = false;
                     this.lblUserLevel.Visible = false;
+
+                    this.txtAccount.Visible = true;
+                    this.txtName.Visible = true;
+                    this.txtEmail.Visible = true;
                     this.ddlUserLevel.Visible = true;
 
-                    this.btnSave.Text = "下一步";
                     this.ltlTitle.Text = "會員管理 - 新增會員";
                 }
-                else // 修改模式
+                else // 有UID
                 {
-                    // 修改模式的話有delete和變更密碼的按鈕，可變更姓名、Email，並顯示建立時間
-                    this.btnDelete.Visible = true;
-                    this.btnPassword.Visible = true;
-
-                    this.lblAccount.Visible = true;
-                    this.txtAccount.Visible = false;
-                    this.lblUserLevel.Visible = true;
-                    this.ddlUserLevel.Visible = false;
-
-                    this.btnSave.Text = "儲存";
-                    this.ltlTitle.Text = "會員管理 - 修改會員資料";
-
-                    string userID = this.Request.QueryString["UID"];
-
-                    if(string.Compare(userID, currentUser.ID) == 0)
+                    // UID和currentUser的ID不同
+                    if (string.Compare(accountUID, currentUser.ID) != 0)
                     {
+                        DataRow editUser = UserInfoManager.GetUserInfoByUserID(accountUID);
+                        if (editUser == null)
+                        {
+                            ltlMsg.Text = "Wrong Edit UserUID.";
+                            return;
+                        }
+                        else // 管理者進入別的會員的編輯頁面
+                        {
+                            
+                            this.btnSave.Visible = false;
+                            this.btnDelete.Visible = true;
+                            this.btnPassword.Visible = false;
+
+                            this.lblAccount.Visible = true;
+                            this.lblName.Visible = true;
+                            this.lblEmail.Visible = true;
+                            this.lblUserLevel.Visible = true;
+
+                            this.txtAccount.Visible = false;
+                            this.txtName.Visible = false;
+                            this.txtEmail.Visible = false;
+                            this.ddlUserLevel.Visible = false;
+
+                            this.lblAccount.Text = editUser["Account"].ToString();
+                            this.lblName.Text = editUser["Name"].ToString();
+                            this.lblEmail.Text = editUser["Email"].ToString();
+                            this.lblUserLevel.Text = ((int)editUser["UserLevel"] == 0) ? "管理員" : "一般會員";
+                            this.lblCreateDate.Text = editUser["CreateDate"].ToString();
+                        }
+                    }
+                    else // UID和currentUser的ID相同
+                    {
+                        this.btnSave.Text = "儲存";
+                        this.btnDelete.Visible = false;
+                        this.btnPassword.Visible = true;
+
+                        this.lblAccount.Visible = true;
+                        this.lblName.Visible = false;
+                        this.lblEmail.Visible = false;
+                        this.lblUserLevel.Visible = true;
+
+                        this.txtAccount.Visible = false;
+                        this.txtName.Visible = true;
+                        this.txtEmail.Visible = true;
+                        this.ddlUserLevel.Visible = false;
+
+                        this.ltlTitle.Text = "會員管理 - 修改會員資料";
+
                         this.lblAccount.Text = currentUser.Account;
                         this.txtName.Text = currentUser.Name;
                         this.txtEmail.Text = currentUser.Email;
                         this.lblUserLevel.Text = (currentUser.UserLevel == 0) ? "管理員" : "一般會員";
                         this.lblCreateDate.Text = currentUser.CreateDate;
                     }
-                    else
-                    {
-                        this.ltlMsg.Text = "UID is not correct.";
-                        this.btnDelete.Visible = false;
-                        this.btnPassword.Visible = false;
 
-                        this.lblAccount.Visible = true;
-                        this.txtAccount.Visible = false;
-                        this.lblUserLevel.Visible = true;
-                        this.ddlUserLevel.Visible = false;
-
-                        this.btnSave.Text = "儲存";
-                    }
+                    // 修改模式的話有delete和變更密碼的按鈕，可變更姓名、Email，並顯示建立時間
+                  
                 }
             }
         }
@@ -138,7 +170,9 @@ namespace AccountingNote.SystemAdmin
 
         protected void btnDelete_Click(object sender, EventArgs e)
         {
-
+            string accountUID = this.Request.QueryString["UID"];
+            UserInfoManager.DeleteUserInfo(accountUID);
+            Response.Redirect("UserList.aspx");
         }
 
         protected void btnPassword_Click(object sender, EventArgs e)
@@ -146,7 +180,6 @@ namespace AccountingNote.SystemAdmin
             UserInfoModel currentUser = AuthManager.GetCurrentUser();
             Response.Redirect("UserPassword.aspx?UID=" + currentUser.ID);
         }
-
 
         private bool CheckInput(out List<string> errMsgList)
         {
@@ -181,20 +214,5 @@ namespace AccountingNote.SystemAdmin
             
         }
 
-        // 儲存的button click事件
-        // 檢查輸入值是否正確(可建立方法)
-        // 正確的話取得輸入值
-
-        // 判斷是新增模式還是修改模式
-        // 新增模式的話呼叫CreateUserInfo(在UserInfoManager新建方法)
-        // 修改模式的話呼叫UpdateUserInfo(在UserInfoManager新建方法)
-
-
-        // 刪除的button click事件
-        // 呼叫DeleteUserInfo(在UserInfoManager新建方法)
-
-
-
-        // 修改密碼button click事件，跳頁至UserPassword.aspx
     }
 }

@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SystemAdmin/Admin.Master" AutoEventWireup="true" CodeBehind="AccountingDetail.aspx.cs" Inherits="AccountingNote.SystemAdmin.AccountingDetail" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+	<title>帳目管理</title>
+
 	<style type="text/css">
 		.auto-style4 {
 			margin-left: 0px;

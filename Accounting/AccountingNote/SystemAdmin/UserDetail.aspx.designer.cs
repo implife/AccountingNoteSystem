@@ -50,23 +50,41 @@ namespace AccountingNote.SystemAdmin
 		/// </remarks>
 		protected global::System.Web.UI.WebControls.TextBox txtName;
 
-		/// <summary>
-		/// txtEmail 控制項。
-		/// </summary>
-		/// <remarks>
-		/// 自動產生的欄位。
-		/// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-		/// </remarks>
-		protected global::System.Web.UI.WebControls.TextBox txtEmail;
+        /// <summary>
+        /// lblName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblName;
 
-		/// <summary>
-		/// lblUserLevel 控制項。
-		/// </summary>
-		/// <remarks>
-		/// 自動產生的欄位。
-		/// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-		/// </remarks>
-		protected global::System.Web.UI.WebControls.Label lblUserLevel;
+        /// <summary>
+        /// txtEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEmail;
+
+        /// <summary>
+        /// lblEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEmail;
+
+        /// <summary>
+        /// lblUserLevel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblUserLevel;
 
 		/// <summary>
 		/// ddlUserLevel 控制項。

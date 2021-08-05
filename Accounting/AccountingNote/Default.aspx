@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>流水帳管理系統</title>
     <style>
         body {text-align:center;background:radial-gradient(ellipse 200% 80% at center,lightblue,white);
         }

@@ -4,6 +4,7 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+	<title>帳目管理</title>
 	<style type="text/css">
 		.auto-stylem {
 			width: 419px;

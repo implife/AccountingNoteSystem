@@ -1,7 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SystemAdmin/Admin.Master" AutoEventWireup="true" CodeBehind="UserDetail.aspx.cs" Inherits="AccountingNote.SystemAdmin.UserDetail" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-	<style>
+    <title>會員管理</title>
+    <style>
         table.UserEditTable th {
             text-align: right;
         }
@@ -59,12 +60,14 @@
             <th class="auto-style5">姓名</th>
             <td class="auto-style9">
                 <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+                <asp:Label ID="lblName" runat="server" Text="--"></asp:Label>
             </td>
         </tr>
         <tr>
             <th>Email</th>
             <td class="auto-style8">
                 <asp:TextBox ID="txtEmail" runat="server" TextMode="Email"></asp:TextBox>
+                <asp:Label ID="lblEmail" runat="server" Text="--"></asp:Label>
             </td>
         </tr>
         <tr>

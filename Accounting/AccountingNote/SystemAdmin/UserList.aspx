@@ -21,6 +21,8 @@
 		}
 	</style>
 </asp:Content>
+
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 	<div class="auto-style7"><h2 align="center" class="auto-style6">&nbsp;會員管理</h2></div>
     <div class="auto-style5">
@@ -43,9 +45,9 @@
             <asp:TemplateField HeaderText="Act">
                 <ItemTemplate>
                     <asp:HyperLink ID="linkEdit" runat="server">編輯</asp:HyperLink>
-                    <%--<a href="/SystemAdmin/UserDetail.aspx?UID=<%# Eval("ID") %>">編輯</a>--%>
                 </ItemTemplate>
             </asp:TemplateField>
+
         </Columns>
     	<FooterStyle BackColor="#99CCCC" ForeColor="#003399" />
 		<HeaderStyle BackColor="#003399" Font-Bold="True" ForeColor="#CCCCFF" />
@@ -57,5 +59,4 @@
 		<SortedDescendingCellStyle BackColor="#D6DFDF" />
 		<SortedDescendingHeaderStyle BackColor="#002876" />
     </asp:GridView>
-    <%--<uc1:ucPager runat="server" id="ucPager" />--%>
 </asp:Content>
