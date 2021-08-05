@@ -26,7 +26,7 @@ namespace AccountingNote.UserControls
             this.CurrentPage = this.GetCurrentPage();
             int totalPages = this.GetTotalPage();
 
-            this.lblPageInfo.Text += $"共 {this.TotalSize} 筆，共 {this.GetTotalPage()} 頁，目前在第 {this.CurrentPage} 頁<br>";
+            this.lblPageInfo.Text = $"共 {this.TotalSize} 筆，共 {this.GetTotalPage()} 頁，目前在第 {this.CurrentPage} 頁<br>";
 
             // 設定LinkFirst和LinkLast
             if (this.CurrentPage > 1)
