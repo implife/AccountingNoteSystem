@@ -71,7 +71,7 @@
                 <asp:Button ID="btnLogout" runat="server" Text="Log Out" OnClick="btnLogout_Click" />
 
             </div>
-            <div>
+            <div id="CTDiv">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
             </div>
         </div>
