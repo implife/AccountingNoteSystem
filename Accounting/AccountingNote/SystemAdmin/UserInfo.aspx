@@ -58,9 +58,5 @@
             </td>
         </tr>
     </table>
-    <br />
-        <div style="text-align:right" class="auto-style7">
-    <asp:Button ID="btnLogout" runat="server" Text="登出" OnClick="btnLogout_Click" Height="37px" Width="85px" Font-Bold="True" Font-Strikeout="False" Font-Underline="False" ToolTip="登出系統" Font-Size="Large" />
-            </div>
-        </div>
+    <%--<asp:Button ID="btnLogout" runat="server" Text="Log Out" OnClick="btnLogout_Click" Visible="false"  />--%>
 </asp:Content>

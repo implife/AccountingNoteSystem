@@ -104,6 +104,7 @@ namespace AccountingNote.SystemAdmin
             Response.Redirect("/SystemAdmin/AccountingDetail.aspx");
         }
 
+        int i = 0;
         /// <summary>
         /// GridView中的DataBound()被呼叫時，將收入支出的下拉選單選項設為"支出"或"收入"，而非0或1
         /// </summary>
@@ -113,7 +114,7 @@ namespace AccountingNote.SystemAdmin
         {
             // 取得GridView的每一列，資料型態為GridViewRow
             GridViewRow row = e.Row;
-
+            //this.lblTest.Text += $"called<{i++}>({row.RowType})({row.DataItem}), ";
 
             if (row.RowType == DataControlRowType.DataRow) // GridView中的列有可能是Header、Footer、DataRow等等
             {

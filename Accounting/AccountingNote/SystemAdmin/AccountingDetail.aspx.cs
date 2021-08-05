@@ -86,7 +86,7 @@ namespace AccountingNote.SystemAdmin
         protected void btnSave_Click(object sender, EventArgs e)
         {
             // 檢查輸入值是否正確
-            this.ltlMsg.Text = "";
+            this.ltlMsg.Text = string.Empty;
             List<string> msgList = new List<string>();
             if (!this.CheckInput(out msgList))
             {

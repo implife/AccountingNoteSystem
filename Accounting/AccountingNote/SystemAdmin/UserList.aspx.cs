@@ -2,6 +2,7 @@
 using AccountingNote.DBSource;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,6 +12,8 @@ namespace AccountingNote.SystemAdmin
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
+        public object DataViewRow { get; private set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             // this.Master會取得System.Web.UI.MasterPage，須轉型成Admin(子類別)才可存取屬性
@@ -36,11 +39,38 @@ namespace AccountingNote.SystemAdmin
             this.gvUserList.DataSource = UserInfoManager.GetUserInfoList();
             this.gvUserList.DataBind();
 
-            // 從資料庫將所有使用者資訊拿出並放進GridView裡，一般會員只能修改自己的資料，並且無法新增會員
-            // 管理者可以修改所有人的資料並新增會員
-            // 按編輯時跳頁至UserDetail
+            if (currentUser.UserLevel == 1)
+                this.btnAdd.Enabled = false;
         }
 
-        // 新增會員的button click事件，跳頁至UserDetail
+        protected void gvUserList_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            GridViewRow gvRow = e.Row;
+
+            if(gvRow.RowType == DataControlRowType.DataRow)
+            {
+                // 將UserLevel的0和1換成管理員和一般會員
+                Label lbl = gvRow.FindControl("lblUserLevel") as Label;
+                DataRow dr = (gvRow.DataItem as DataRowView).Row;
+
+                int level = dr.Field<int>("UserLevel");
+                if (level == 0)
+                    lbl.Text = "管理員";
+                else
+                    lbl.Text = "一般會員";
+
+                // 設定編輯的超連結，並只能編輯自己的資料
+                HyperLink link = gvRow.FindControl("linkEdit") as HyperLink;
+                string account = HttpContext.Current.Session["UserLoginInfo"] as string;
+
+                if (string.Compare(dr.Field<string>("Account"), account) == 0)
+                    link.NavigateUrl = "/SystemAdmin/UserDetail.aspx?UID=" + dr["ID"].ToString();
+            }
+        }
+
+        protected void btnAdd_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("UserDetail.aspx");
+        }
     }
 }

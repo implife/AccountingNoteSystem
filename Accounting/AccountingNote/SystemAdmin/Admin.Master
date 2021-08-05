@@ -25,32 +25,51 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
 
     </asp:ContentPlaceHolder>
+    <link rel="stylesheet" href="/SystemAdmin/Css/main.css">
+    <script>
+        function MenuSlide() {
+            var div1 = document.getElementById("MenuCont");
 
+            if (div1.style.display == "none") {
+                div1.style.display = "block";
+            }
+            else if (div1.style.display == "block") {
+                div1.style.display = "none";
+            }
+        }
+
+        function logoutClick() {
+            console.log("sergsergse");
+            document.getElementById("btnLogout").click();
+        }
+
+
+    </script>
 </head>
-<body  >
-<form id="form1" runat="server">
-        <table id="water">
-            <tr >
-                <td  colspan="2">
-                    <h2 class="auto-style3" >流水帳管理系統</h2>
-                </td>
-            </tr>
-            <tr>
-                <td class="auto-style2">
-                    <br />
-                    <a href="UserInfo.aspx">使用者資訊</a>
-                    <br />
-                    <a href="AccountingList.aspx">流水帳管理</a>
-                    <br />
-                    <a href="UserList.aspx">會員管理</a>
-                </td>
-                <td class="auto-style1">
-                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                    </asp:ContentPlaceHolder>
-                </td>
-            </tr>
-        </table>
+<body>
+    <form id="form1" runat="server">
+        <div id="div1">
+            <div id="div2">
+                <h2>流水帳管理系統</h2>
+                <div class="dropdown">
+                    <span class="btn" onclick="MenuSlide()">
+                        <img id="imgMenu" src="ImageMenu/menu.png">
+                    </span>
+                    <div id="MenuCont" class="dropdown-content" style="display: none">
+                        <a href="UserInfo.aspx">使用者資訊</a>
+                        <a href="AccountingList.aspx">流水帳管理</a>
+                        <a href="UserList.aspx">會員管理</a>
+                        <a href="javascript:void(0)" onclick="logoutClick()">登出</a>
+                    </div>
+                </div>
 
+                <asp:Button ID="btnLogout" runat="server" Text="Log Out" OnClick="btnLogout_Click" Style="opacity: 0" Enabled="false" />
+
+            </div>
+            <div>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+            </div>
+        </div>
     </form>
       
 </body>
