@@ -5,27 +5,35 @@
 <html>
 <head runat="server">
     <title></title>
-        <style>
-        h2{background-color:lightblue}
-        #water {text-align:center}
-        
-  
-    	.auto-style1 {
-			width: 1446px;
-		}
-		.auto-style2 {
-			width: 632px;
-		}
-       
-    	.auto-style3 {
-			width: 1565px;
-		}
-       
-    </style>
-    <asp:ContentPlaceHolder ID="head" runat="server">
-
-    </asp:ContentPlaceHolder>
     <link rel="stylesheet" href="/SystemAdmin/Css/main.css">
+    <style>
+
+        #water {
+            text-align: center
+        }
+
+
+        .auto-style1 {
+            width: 1446px;
+        }
+
+        .auto-style2 {
+            width: 632px;
+        }
+
+        .auto-style3 {
+            width: 1565px;
+        }
+
+        #btnLogout {
+            position: absolute;
+            opacity: 0; 
+            top:-200px;
+        }
+    </style>
+
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+
     <script>
         function MenuSlide() {
             var div1 = document.getElementById("MenuCont");
@@ -37,13 +45,10 @@
                 div1.style.display = "none";
             }
         }
-
         function logoutClick() {
-            console.log("sergsergse");
+            console.log("a onclick");
             document.getElementById("btnLogout").click();
         }
-
-
     </script>
 </head>
 <body>
@@ -63,7 +68,7 @@
                     </div>
                 </div>
 
-                <asp:Button ID="btnLogout" runat="server" Text="Log Out" OnClick="btnLogout_Click" Style="opacity: 0" Enabled="false" />
+                <asp:Button ID="btnLogout" runat="server" Text="Log Out" OnClick="btnLogout_Click" />
 
             </div>
             <div>
@@ -71,6 +76,6 @@
             </div>
         </div>
     </form>
-      
+
 </body>
 </html>

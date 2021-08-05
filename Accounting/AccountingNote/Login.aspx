@@ -26,11 +26,11 @@
     
 </head>
 <body style="height: 556px">
-    <div style="text-align: center; background:radial-gradient(ellipse 1000% 80% at center,lightblue,white);" class="auto-style1">
+    <div style="text-align: center; background:radial-gradient(ellipse 500% 50% at center,lightblue,white);" class="auto-style1">
 
     <form id="form1" runat="server" class="auto-style3">
         <br/>
-    <asp:Label ID="Label1" runat="server" Text="登入" Font-Size="XX-Large" BackColor="#D7F7FF" BorderColor="Black" ForeColor="Black" BorderStyle="Solid" Font-Bold="True" Font-Italic="False" BorderWidth="2px" CssClass="auto-style2" Height="41px" Width="185px"></asp:Label>
+    <asp:Label ID="Label1" runat="server" Text="登入頁面" Font-Size="XX-Large" BackColor="#D7F7FF" BorderColor="White" ForeColor="Black" BorderStyle="None" Font-Bold="True" Font-Italic="False" CssClass="auto-style2" Height="41px" Width="185px"></asp:Label>
     	<br />
     
     <br />
