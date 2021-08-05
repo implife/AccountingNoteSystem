@@ -4,7 +4,6 @@
 
 <html>
 <head runat="server">
-    <title></title>
     <link rel="stylesheet" href="/SystemAdmin/Css/main.css">
     <style>
 
@@ -27,7 +26,7 @@
 
         #btnLogout {
             position: absolute;
-            opacity: 0; 
+            opacity: 0;
             top:-200px;
         }
     </style>
@@ -68,13 +67,14 @@
                     </div>
                 </div>
 
-                <asp:Button ID="btnLogout" runat="server" Text="Log Out" OnClick="btnLogout_Click" />
+                
 
             </div>
             <div>
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
             </div>
         </div>
+        <asp:Button ID="btnLogout" runat="server" Text="Log Out" OnClick="btnLogout_Click" />
     </form>
 
 </body>
