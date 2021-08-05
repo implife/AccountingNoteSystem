@@ -62,7 +62,7 @@ img {
     cursor: pointer;
 }
 
-a {
+#MenuCont >a {
     color: black;
     text-decoration: none;
     padding: 5px;
