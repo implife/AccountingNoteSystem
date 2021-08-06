@@ -22,10 +22,8 @@
 			width: 425px;
             text-align:right
 		}
-    	.auto-style7 {
-			width: 396px;
-            text-align:right;
-		}
+    	
+		
     	.auto-style8 {
 			width: 217px;
 		}
@@ -88,11 +86,12 @@
         </tr>
     </table>
     <br />
-    <div style="text-align:right" class="auto-style7">
-        <asp:Button ID="btnSave" runat="server" Text="儲存" OnClick="btnSave_Click" />
-        <asp:Button ID="btnDelete" runat="server" Text="刪除" OnClick="btnDelete_Click" />
-        <asp:Button ID="btnPassword" runat="server" Text="變更密碼" OnClick="btnPassword_Click" Width="76px" />
+    <div class="UDbtnDiv">
+        <asp:Button class="UDbtnClass" ID="btnSave" runat="server" Text="儲存" OnClick="btnSave_Click" />
+        <asp:Button class="UDbtnClass" ID="btnDelete" runat="server" Text="刪除" OnClick="btnDelete_Click" />
+        <asp:Button class="UDbtnClass" ID="btnPassword" runat="server" Text="變更密碼" OnClick="btnPassword_Click" Width="76px" /><br />
+        <asp:Literal ID="ltlMsg" runat="server"></asp:Literal>
     </div>
-    <div style="text-align:center"><asp:Literal ID="ltlMsg" runat="server"></asp:Literal></div>
+    
     
 </asp:Content>

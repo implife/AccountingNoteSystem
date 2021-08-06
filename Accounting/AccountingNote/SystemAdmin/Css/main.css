@@ -78,3 +78,67 @@ img {
     width:100%;
     height:100%
 }
+
+#water {
+    text-align: center
+}
+
+
+.auto-style1 {
+    width: 1446px;
+}
+
+.auto-style2 {
+    width: 632px;
+}
+
+.auto-style3 {
+    width: 1565px;
+}
+
+#btnLogout {
+    position: absolute;
+    opacity: 0;
+    top: -200px;
+}
+
+#water {
+    text-align: center
+}
+
+
+.auto-style1 {
+    width: 1446px;
+}
+
+.auto-style2 {
+    width: 632px;
+}
+
+.auto-style3 {
+    width: 1565px;
+}
+
+#btnLogout {
+    position: absolute;
+    opacity: 0;
+    top: -200px;
+}
+.UPWDBtnSave {
+    padding-left: 48%;
+}
+
+table.UserPasswordEdit th {
+    text-align: right;
+}
+
+table.UserPasswordEdit td {
+    padding: 5px 15px;
+}
+.UDbtnDiv{
+    padding-left:47%;
+
+}
+.UDbtnClass{
+    margin-bottom:5px;
+}

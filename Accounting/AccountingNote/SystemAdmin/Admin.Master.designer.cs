@@ -33,7 +33,7 @@ namespace AccountingNote.SystemAdmin
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// ContentPlaceHolder1 control.
+        /// ContentPlaceHolder1 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
@@ -42,7 +42,7 @@ namespace AccountingNote.SystemAdmin
         protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
 
         /// <summary>
-        /// btnLogout control.
+        /// btnLogout 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
