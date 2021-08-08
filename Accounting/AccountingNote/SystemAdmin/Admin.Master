@@ -5,32 +5,7 @@
 <html>
 <head runat="server">
     <link rel="stylesheet" href="/SystemAdmin/Css/main.css">
-    <style>
-
-        #water {
-            text-align: center
-        }
-
-
-        .auto-style1 {
-            width: 1446px;
-        }
-
-        .auto-style2 {
-            width: 632px;
-        }
-
-        .auto-style3 {
-            width: 1565px;
-        }
-
-        #btnLogout {
-            position: absolute;
-            opacity: 0;
-            top:-200px;
-        }
-    </style>
-
+    <title>流水帳系統管理</title>
     <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
 
     <script>

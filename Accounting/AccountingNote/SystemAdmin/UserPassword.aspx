@@ -1,16 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SystemAdmin/Admin.Master" AutoEventWireup="true" CodeBehind="UserPassword.aspx.cs" Inherits="AccountingNote.SystemAdmin.UserPassword" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+     
     <title>會員管理</title>
-    <style>
-       
-        table.UserPasswordEdit th{
-            text-align: right;
-        }
-        table.UserPasswordEdit td{
-            padding: 5px 15px;
-        }
-    </style>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h2 align="center">
@@ -46,9 +39,11 @@
             </td>
         </tr>
     </table>
-    <asp:Button ID="btnSave" runat="server" Text="儲存" OnClick="btnSave_Click" />
-    <br />
-    <asp:Literal ID="ltlMsg" runat="server"></asp:Literal>
+    <div class="UPWDBtnSave">
+        <asp:Button ID="btnSave" runat="server" Text="儲存" OnClick="btnSave_Click" /><br />
+        <asp:Literal ID="ltlMsg" runat="server"></asp:Literal>
+    </div>
+   
 
 
 </asp:Content>
