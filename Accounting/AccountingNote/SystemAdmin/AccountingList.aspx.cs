@@ -117,7 +117,6 @@ namespace AccountingNote.SystemAdmin
             Response.Redirect("/SystemAdmin/AccountingDetail.aspx");
         }
 
-        int i = 0;
         /// <summary>
         /// GridView中的DataBound()被呼叫時，將收入支出的下拉選單選項設為"支出"或"收入"，而非0或1
         /// </summary>

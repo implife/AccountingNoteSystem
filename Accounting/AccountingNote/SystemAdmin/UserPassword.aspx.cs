@@ -44,16 +44,19 @@ namespace AccountingNote.SystemAdmin
 
                 this.ltlTitle.Text = "會員管理 - 變更密碼";
                 this.plcOriginalPWD.Visible = true;
+                this.lblNewPWD.Text = "新密碼";
+                this.lblNewPWDAgain.Text = "確認新密碼";
                 this.btnSave.Text = "變更";
-
             }
             else // 新增會員模式
             {
                 UserInfoModel model = this.Session["CreateUserInfo"] as UserInfoModel;
                 this.lblAccount.Text = model.Account;
 
-                this.ltlTitle.Text = "會員管理 - 新增會員";
+                this.ltlTitle.Text = "會員管理 - 新增會員 - 設定密碼";
                 this.plcOriginalPWD.Visible = false;
+                this.lblNewPWD.Text = "密碼";
+                this.lblNewPWDAgain.Text = "確認密碼";
                 this.btnSave.Text = "建立";
             }
 
@@ -117,11 +120,5 @@ namespace AccountingNote.SystemAdmin
                 return false;
         }
 
-        // 變更的button click事件
-        // 判斷輸入值是否正確，新密碼跟確認新密碼是否一樣
-        // 輸入值正確的話就呼叫UpdateUserInfo(在UserInfoManager新建方法)
-
-
-        // 取消的button click事件，跳頁至UserDetail.aspx
     }
 }

@@ -51,6 +51,15 @@ namespace AccountingNote.SystemAdmin
         protected global::System.Web.UI.WebControls.TextBox txtOriginPWD;
 
         /// <summary>
+        /// lblNewPWD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNewPWD;
+
+        /// <summary>
         /// txtNewPWD control.
         /// </summary>
         /// <remarks>
@@ -58,6 +67,15 @@ namespace AccountingNote.SystemAdmin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNewPWD;
+
+        /// <summary>
+        /// lblNewPWDAgain control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNewPWDAgain;
 
         /// <summary>
         /// txtNewPWDAgain control.

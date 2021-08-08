@@ -42,6 +42,12 @@ namespace AccountingNote.DBSource
             
         }
 
+        /// <summary>
+        /// 利用UserID取得使用者資料
+        /// 在UserDetail中需要利用QueryString中的UID到資料庫找到該使用者
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns>包含使用者資訊的DataRow</returns>
         public static DataRow GetUserInfoByUserID(string userID)
         {
             string connStr = DBHelper.GetConnectionString();
@@ -65,7 +71,6 @@ namespace AccountingNote.DBSource
             }
 
         }
-
 
         /// <summary>
         /// 取得所有會員的資料
@@ -223,6 +228,11 @@ namespace AccountingNote.DBSource
             }
         }
 
+        /// <summary>
+        /// 利用UserID刪除該使用者資料
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
         public static bool DeleteUserInfo(string userID)
         {
             string connStr = DBHelper.GetConnectionString();

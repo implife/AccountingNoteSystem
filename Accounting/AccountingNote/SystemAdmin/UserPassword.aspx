@@ -34,19 +34,19 @@
         </asp:PlaceHolder>
 
         <tr>
-            <th>新密碼</th>
+            <th><asp:Label ID="lblNewPWD" runat="server" Text="新密碼"></asp:Label></th>
             <td>
                 <asp:TextBox ID="txtNewPWD" runat="server" TextMode="Password"></asp:TextBox>
             </td>
         </tr> 
         <tr>
-            <th>確認新密碼</th>
+            <th><asp:Label ID="lblNewPWDAgain" runat="server" Text="確認新密碼"></asp:Label></th>
             <td>
                 <asp:TextBox ID="txtNewPWDAgain" runat="server" TextMode="Password"></asp:TextBox>
             </td>
         </tr>
     </table>
-    <asp:Button centerID="btnSave" runat="server" Text="儲存" OnClick="btnSave_Click" />
+    <asp:Button ID="btnSave" runat="server" Text="儲存" OnClick="btnSave_Click" />
     <br />
     <asp:Literal ID="ltlMsg" runat="server"></asp:Literal>
 

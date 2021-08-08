@@ -10,35 +10,9 @@
         table.UserEditTable td {
             padding: 5px 15px;
         }
-    	.auto-style4 {
-			width: 318px;
-			margin-left: 171px;
-			margin-right: 0px;
-		}
-		.auto-style5 {
-			height: 27px;
-		}
-		.auto-style6 {
-			width: 425px;
-            text-align:right
-		}
     	.auto-style7 {
 			width: 396px;
             text-align:right;
-		}
-    	.auto-style8 {
-			width: 217px;
-		}
-		.auto-style9 {
-			height: 27px;
-			width: 217px;
-		}
-		.auto-style10 {
-			height: 24px;
-		}
-		.auto-style11 {
-			width: 217px;
-			height: 24px;
 		}
     </style>
 </asp:Content>
@@ -47,32 +21,32 @@
         <asp:Literal ID="ltlTitle" runat="server"></asp:Literal>
     </h2>
 
-    <table align="center" class="auto-style4">
+    <table align="center">
         <tr>
             <th>帳號</th>
-            <td class="auto-style8">
+            <td >
                 <asp:Label ID="lblAccount" runat="server" Text="--"></asp:Label>
                 <asp:TextBox ID="txtAccount" runat="server"></asp:TextBox>
 
             </td>
         </tr>
         <tr>
-            <th class="auto-style5">姓名</th>
-            <td class="auto-style9">
+            <th>姓名</th>
+            <td>
                 <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
                 <asp:Label ID="lblName" runat="server" Text="--"></asp:Label>
             </td>
         </tr>
         <tr>
             <th>Email</th>
-            <td class="auto-style8">
+            <td>
                 <asp:TextBox ID="txtEmail" runat="server" TextMode="Email"></asp:TextBox>
                 <asp:Label ID="lblEmail" runat="server" Text="--"></asp:Label>
             </td>
         </tr>
         <tr>
             <th>等級</th>
-            <td class="auto-style8">
+            <td>
                 <asp:Label ID="lblUserLevel" runat="server" Text="--"></asp:Label>
                 <asp:DropDownList ID="ddlUserLevel" runat="server">
                     <asp:ListItem Value="0">管理員</asp:ListItem>
@@ -81,8 +55,8 @@
             </td>
         </tr>
         <tr>
-            <th class="auto-style10">建立時間</th>
-            <td class="auto-style11">
+            <th><asp:Label ID="lblCreateDateTitle" runat="server" Text="建立時間"></asp:Label></th>
+            <td>
                 <asp:Label ID="lblCreateDate" runat="server" Text="--"></asp:Label>
             </td>
         </tr>
